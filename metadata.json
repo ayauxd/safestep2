@@ -1,6 +1,6 @@
 {
-  "name": "SafeStep",
-  "description": "An intelligent AI safety companion that walks with you, providing real-time audio guidance and environmental awareness.",
+  "name": "SafeStep Tactical",
+  "description": "AI-powered safety companion for urban athletes. Real-time voice coaching, performance metrics, and intelligent route guidance for your late-night walks and runs.",
   "requestFramePermissions": [
     "geolocation"
   ]

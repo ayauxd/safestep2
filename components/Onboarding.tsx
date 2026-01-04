@@ -6,37 +6,39 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ArrowRight, Crosshair, FastForward, Activity, Radio, Target } from 'lucide-react';
+import { Shield, ArrowRight, Crosshair, FastForward, Radio, Target } from 'lucide-react';
 
 interface Props {
   onComplete: () => void;
-  images: string[];
 }
 
 const slides = [
   {
-    tag: "PROTOCOL_01",
-    title: "AI GUARDIAN OVERWATCH",
-    desc: "SafeStep isn't just a map. It's an active AI Guardian that tracks your progress through high-risk urban environments with 360° awareness.",
+    tag: "STEP_01",
+    title: "NEVER WALK ALONE",
+    desc: "SafeStep is your AI-powered companion for late-night walks. An intelligent voice guide that stays with you from door to destination.",
     icon: Shield,
     color: "text-safety",
-    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=1200&auto=format&fit=crop" // Runner in city with dramatic scale
+    // Night runner with city lights - represents safety during night walks
+    image: "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=1200&q=80&auto=format&fit=crop"
   },
   {
-    tag: "PROTOCOL_02",
-    title: "TACTICAL VOICE COACHING",
-    desc: "Receive elite performance and safety instructions in your ear. Real-time pathfinding adapted to your intensity and surroundings.",
+    tag: "STEP_02",
+    title: "VOICE IN YOUR EAR",
+    desc: "Real-time audio coaching that knows your route. Your AI guardian provides turn-by-turn safety guidance, pace tips, and environmental awareness.",
     icon: Radio,
     color: "text-vitality",
-    image: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200&auto=format&fit=crop" // Focused sprint / technical focus
+    // Runner with headphones - represents audio coaching
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80&auto=format&fit=crop"
   },
   {
-    tag: "PROTOCOL_03",
-    title: "MISSION PERFORMANCE",
-    desc: "Integrated biometrics and environmental data feeds. SafeStep synchronizes your vitals with the city's pulse for peak performance.",
+    tag: "STEP_03",
+    title: "ARRIVE SAFELY",
+    desc: "Track your vitals, monitor your pace, and complete every journey with confidence. SafeStep turns every walk into a mission accomplished.",
     icon: Target,
     color: "text-alert",
-    image: "https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1200&auto=format&fit=crop" // Close-up grit / sprinting
+    // Urban runner finishing strong - represents mission completion
+    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80&auto=format&fit=crop"
   }
 ];
 

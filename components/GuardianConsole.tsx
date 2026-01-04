@@ -22,17 +22,38 @@ const GuardianConsole: React.FC<Props> = ({ accompaniment, route, onSegmentChang
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isBuffering, setIsBuffering] = useState(false);
-  const [vitality, setVitality] = useState<VitalityStats>({ bpm: 72, steps: 0, pace: '0\'00"', safetyScore: 98 });
-  
+  const [vitality, setVitality] = useState<VitalityStats>({ bpm: 72, steps: 0, pace: "5'30\"", safetyScore: 98 });
+
   const audioContextRef = useRef<AudioContext | null>(null);
   const sourceRef = useRef<AudioBufferSourceNode | null>(null);
   const startTimeRef = useRef(0);
   const offsetRef = useRef(0);
   const indexRef = useRef(currentIdx);
 
-  useEffect(() => { 
-    indexRef.current = currentIdx; 
-    onSegmentChange(currentIdx); 
+  // Dynamic vitality simulation during active mission
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setVitality(prev => {
+        const newSteps = prev.steps + Math.floor(Math.random() * 12) + 8;
+        const paceMin = 4 + Math.floor(Math.random() * 2);
+        const paceSec = Math.floor(Math.random() * 60);
+        return {
+          bpm: 85 + Math.floor(Math.random() * 25),
+          steps: newSteps,
+          pace: `${paceMin}'${paceSec.toString().padStart(2, '0')}"`,
+          safetyScore: 94 + Math.floor(Math.random() * 6)
+        };
+      });
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    indexRef.current = currentIdx;
+    onSegmentChange(currentIdx);
   }, [currentIdx]);
 
   const stop = () => { 
@@ -85,10 +106,10 @@ const GuardianConsole: React.FC<Props> = ({ accompaniment, route, onSegmentChang
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col gap-6">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Heart} label="BPM" value={`${75 + Math.floor(Math.random() * 15)}`} color="text-red-500" />
-        <StatCard icon={Zap} label="MISSION_STEPS" value="4,291" color="text-vitality" />
-        <StatCard icon={Wind} label="AVG_PACE" value="5'12\" color="text-blue-400" />
-        <StatCard icon={Shield} label="THREAT_INDEX" value="SECURE" color="text-safety" />
+        <StatCard icon={Heart} label="BPM" value={vitality.bpm.toString()} color="text-red-500" />
+        <StatCard icon={Zap} label="MISSION_STEPS" value={vitality.steps.toLocaleString()} color="text-vitality" />
+        <StatCard icon={Wind} label="AVG_PACE" value={vitality.pace} color="text-blue-400" />
+        <StatCard icon={Shield} label="SAFETY_SCORE" value={`${vitality.safetyScore}%`} color="text-safety" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

@@ -5,7 +5,7 @@
 */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Shield, ArrowRight, Radar, Activity, Zap, Crosshair } from 'lucide-react';
+import { Radar, Crosshair } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import RoutePlanner from './components/RoutePlanner';
 import GuardianConsole from './components/GuardianConsole';
@@ -14,11 +14,6 @@ import Onboarding from './components/Onboarding';
 import { AppState, RouteDetails, SafetyAccompaniment } from './types';
 import { generateSafetySegment, generateSegmentAudio, calculateTotalSegments, generateSafetyProtocol, generateTacticalImage } from './services/geminiService';
 
-const ONBOARDING_ASSETS = [
-  "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8",
-  "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
-  "https://images.unsplash.com/photo-1594882645126-14020914d58d"
-];
 
 function App() {
   const [appState, setAppState] = useState<AppState>(AppState.ONBOARDING);
@@ -96,9 +91,8 @@ function App() {
 
       <AnimatePresence mode="wait">
         {appState === AppState.ONBOARDING && (
-          <Onboarding 
-            images={ONBOARDING_ASSETS}
-            onComplete={() => setAppState(AppState.PLANNING)} 
+          <Onboarding
+            onComplete={() => setAppState(AppState.PLANNING)}
           />
         )}
       </AnimatePresence>
