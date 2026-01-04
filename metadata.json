@@ -1,0 +1,7 @@
+{
+  "name": "SafeStep",
+  "description": "An intelligent AI safety companion that walks with you, providing real-time audio guidance and environmental awareness.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
